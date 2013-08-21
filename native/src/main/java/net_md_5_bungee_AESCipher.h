@@ -18,10 +18,10 @@ JNIEXPORT void JNICALL Java_net_md_15_bungee_AESCipher_init
 /*
  * Class:     net_md_5_bungee_AESCipher
  * Method:    cipher
- * Signature: (JIJ)V
+ * Signature: (JJIJ)V
  */
 JNIEXPORT void JNICALL Java_net_md_15_bungee_AESCipher_cipher
-  (JNIEnv *, jobject, jlong, jint, jlong);
+  (JNIEnv *, jobject, jlong, jlong, jint, jlong);
 
 #ifdef __cplusplus
 }
