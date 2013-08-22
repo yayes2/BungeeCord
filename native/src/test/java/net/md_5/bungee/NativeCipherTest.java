@@ -10,7 +10,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class AESTest
+public class NativeCipherTest
 {
 
     private final byte[] plainBytes = "This is a test".getBytes();
@@ -52,16 +52,14 @@ public class AESTest
         // Create output buf
         ByteBuf out = Unpooled.directBuffer();
         // Create the cipher
-        AESCipher cipher = new AESCipher();
+        NativeCipher cipher = new NativeCipher();
 
         // Encrypt the bytes
-        cipher.init( secret, true );
-        cipher.cipher( nativePlain, out );
+        cipher.cipher( true, secret.getEncoded(), nativePlain, out );
         Assert.assertEquals( nativeCiphered, out );
 
         // Decrypt the bytes
-        cipher.init( secret, false );
-        cipher.cipher( out.copy(), out );
+        cipher.cipher( false, secret.getEncoded(), out.copy(), out );
         Assert.assertEquals( nativePlain, out );
     }
 }

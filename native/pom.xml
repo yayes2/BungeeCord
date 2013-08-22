@@ -13,11 +13,16 @@
     <groupId>net.md-5</groupId>
     <artifactId>bungeecord-native</artifactId>
     <version>1.6.2-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>nar</packaging>
 
     <name>BungeeCord-Native</name>
     <description>Optional native code to speed up and enhance BungeeCord functionality.</description>
-    
+
+    <properties>
+        <!-- Tests via nar are run in the integration test phase, so turn off the normal test phase. -->
+        <skipTests>true</skipTests>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -31,4 +36,23 @@
             <version>${netty.version}</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.trygvis.usb</groupId>
+                <artifactId>maven-nar-plugin</artifactId>
+                <version>2.1-trygvis-1</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <libraries>
+                        <library>
+                            <type>jni</type>
+                            <narSystemPackage>net.md_5.bungee</narSystemPackage>
+                        </library>
+                    </libraries>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
