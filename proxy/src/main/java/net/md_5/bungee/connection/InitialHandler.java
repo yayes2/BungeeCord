@@ -212,6 +212,8 @@ public class InitialHandler extends PacketHandler implements PendingConnection
                 ch.setProtocol( Protocol.LOGIN );
                 // Login
                 break;
+            case 3:
+                if (handshake.getRequestedProtocol() == 121) break;
             default:
                 throw new IllegalArgumentException( "Cannot request protocol " + handshake.getRequestedProtocol() );
         }
