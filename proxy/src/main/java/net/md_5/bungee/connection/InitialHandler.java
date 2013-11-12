@@ -122,7 +122,7 @@ public class InitialHandler extends PacketHandler implements PendingConnection
     @Override
     public void handle(LegacyPing ping) throws Exception
     {
-        ServerPing legacy = new ServerPing( new ServerPing.Protocol( bungee.getGameVersion(), bungee.getProtocolVersion() ),
+        ServerPing legacy = new ServerPing( new ServerPing.Protocol( "1.6.4", 78 ),
                 new ServerPing.Players( listener.getMaxPlayers(), bungee.getOnlineCount(), null ), listener.getMotd(), null );
         legacy = bungee.getPluginManager().callEvent( new ProxyPingEvent( this, legacy ) ).getResponse();
 
@@ -227,7 +227,7 @@ public class InitialHandler extends PacketHandler implements PendingConnection
         {
             disconnect( bungee.getTranslation( "outdated_server" ) );
             return;
-        } else if ( handshake.getProtocolVersion() < bungee.getProtocolVersion() )
+        } else if ( handshake.getProtocolVersion() < 74 || handshake.getProtocolVersion() != bungee.getProtocolVersion() )
         {
             disconnect( bungee.getTranslation( "outdated_client" ) );
             return;
